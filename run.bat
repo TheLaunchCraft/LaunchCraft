@@ -34,7 +34,7 @@ goto run
 cls
 echo Getting the new minecraft version.
 echo.
-FTP -S:Getfiles.ftp [ftp.gamingforaustralia.com.au]
+FTP -S:Getfiles.ftp [## NEW SERVER WITH HELD FROM GITHUB##]
 IF EXIST "\minecraft.zip" (goto ZipDown) ELSE (goto UnZip)
 REM .In
 REM Should be download the new version.
