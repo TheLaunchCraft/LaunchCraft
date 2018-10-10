@@ -1,0 +1,5 @@
+	[##FTP USERNAME##]
+	[##FTP PASSWORD##]
+	binary
+	get /version.txt
+	quit
