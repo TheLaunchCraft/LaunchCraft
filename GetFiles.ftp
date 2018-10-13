@@ -1,9 +1,0 @@
-	[##FTP USERNAME##]
-	[##FTP PASSWORD##]
-	binary
-	get /usr/file1.exe
-	get file2.html
-	mget *.jpeg
-	ascii
-	mget *.txt
-	quit

@@ -1,7 +1,0 @@
-	[##FTP USERNAME##]
-	[##FTP PASSWORD##]
-	binary
-	mput *.html
-	cd images
-	mput *.gif
-	quit
