@@ -1,16 +1,17 @@
 @echo off
 :handles
 Color 6
-set server=##SERVER NAME WITH HELD FROM GITHUB##
+set server=##SERVER IP WITH HELD FROM GITHUB##
+set back-server=##SERVER IP WITH HELD FROM GITHUB##
 set server-map=T:\
 set installed=%appdata%\.minecraft\
-set V=1.0
+set V=A01
 set name=Minecraft Launcher %V%
 title %name%
 cls
 
-:map-server
-NET USE T: %server%\gfalaunchcraft\
+:server-map
+NET USE T: %server%\backup\gfalaunchcraft\
 goto server
 
 :server
@@ -32,12 +33,10 @@ IF EXIST "\%V%.txt" (echo Match) ELSE (goto GetUpdate2)
 goto run
 
 :GetUpdate2
-::GetFiles.ftp
 cls
 echo Getting the new minecraft version.
 echo.
-FTP -S:Getfiles.ftp [## NEW SERVER WITH HELD FROM GITHUB##]
-IF EXIST "\minecraft.zip" (goto ZipDown) ELSE (goto UnZip)
+IF EXIST "%server-map%\minecraft.zip" (goto ZipDown) ELSE (goto UnZip)
 REM .In
 REM Should be downloading the new version.
 REM .Out
@@ -49,7 +48,7 @@ REM .Out
 REM .In
 REM Starting the download again
 REM .Out
-start ##DOWNLOAD ZIP WITH HELD FROM GITHUB##
+XCOPY /q ##DOWNLOAD ZIP WITH HELD FROM GITHUB##
 goto UnZip
 
 :UnZip
