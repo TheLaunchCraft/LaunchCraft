@@ -11,50 +11,67 @@ title %name%
 cls
 
 :server-map
-NET USE T: %server%\backup\gfalaunchcraft\
+NET USE T: %server%\backup\ /P:No
 goto server
 
 :server
+cls
 echo.
 echo Is there a server?
 echo.
-IF EXIST "%server-map%\is-server.txt" (goto V-Check1) ELSE (goto V-Check2)
+IF EXIST "%server-map%\is-server.txt" (goto V-Check) ELSE (goto Fail)
 
-:V-Check1
+:V-Check
 cls
 echo Checking version
-IF EXIST "%server-map%\%V%.txt" (echo Match) ELSE (goto GetUpdate1)
+IF EXIST "%server-map%\%V%.txt" (echo Match) ELSE (goto GetUpdate)
+goto continue
 
-:V-Check2
-::VCheck.ftp
+:Fail
 cls
-echo Checking version
-IF EXIST "\%V%.txt" (echo Match) ELSE (goto GetUpdate2)
-goto run
+echo Checking of the version failed.
+echo This could be due to not be connected to the internet.
+echo Please check your internet connection and try again.
+echo After checking your connection, press anykey to try again.
+pause
+goto handles
 
-:GetUpdate2
+:GetUpdate
 cls
-echo Getting the new minecraft version.
+echo Getting the new launcher version.
 echo.
-IF EXIST "%server-map%\minecraft.zip" (goto ZipDown) ELSE (goto UnZip)
+IF EXIST "%server-map%\update.zip" (goto ZipDown) ELSE (goto UnZip)
 REM .In
 REM Should be downloading the new version.
 REM .Out
 
 :continue
+cls
+NET USE T: /DELETE /Y
 
+:run-backup
+cls
+NET USE T: %server%\backup\%username% /P:No
+cd %installed%
+XCOP
+NET USE T: /DELETE /Y
 
 :ZipDown
+cls
 REM .In
 REM Starting the download again
 REM .Out
-XCOPY /q ##DOWNLOAD ZIP WITH HELD FROM GITHUB##
+NET USE T: /DELETE /Y
+NET USE T: %server%\backup\ /P:No
+echo Getting the new version, depending on your internet this could be a while.
+echo After it has compleated it will automatically continue!
+XCOPY "%server-map%\update.zip" /q "C:\Minecraft\"
 goto UnZip
 
 :UnZip
+cls
 REM .In
 REM Going to unzip the file.
 REM .Out
-MOVE "C:\Users\%username%\Downloads\minecraft.zip" /q "C:\Minecraft\"
 Expand C:\Minecraft\minecraft.zip
 XCOPY "C:\Minecraft\" /q "%appdata%\.minecraft\"
