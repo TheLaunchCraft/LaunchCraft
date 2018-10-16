@@ -11,11 +11,12 @@ title %name%
 cls
 
 :notice
-echo Please make sure you have nothing mapped to your T drive.
-echo This launcher uses this drive because it's at the center of the letters,
-echo and we think this letter would not be used for anything else.
 echo.
-echo If your ready to continue,
+echo Please make sure you have nothing mapped to your T drive.
+echo This launcher uses this drive because it's at the center of the
+echo letters and we think this letter would not be used for anything else.
+echo.
+echo If your ready!
 pause
 goto server
 
@@ -23,7 +24,7 @@ REM In.
 REM server-map-info
 REM NET USE T: %server% /P:No
 REM Out.
-
+:again
 :server
 cls
 NET USE T: %server%\information\ /P:No /user:##username and password withheld##
@@ -46,7 +47,7 @@ echo This could be due to not be connected to the internet.
 echo Please check your internet connection and try again.
 echo After checking your connection, press anykey to try again.
 pause
-goto handles
+goto again
 
 :GetUpdate
 cls
