@@ -10,6 +10,16 @@ set name=Minecraft Launcher %V%
 title %name%
 cls
 
+:notice
+echo Please make sure you have nothing mapped to your T drive.
+echo This launcher uses this drive because it's at the center of the letters,
+echo and we think this letter would not be used for anything else.
+echo.
+echo If your ready to continue,
+pause
+goto server-map
+
+
 :server-map
 NET USE T: %server%\backup\ /P:No
 goto server
