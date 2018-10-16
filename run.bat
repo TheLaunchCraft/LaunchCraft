@@ -1,8 +1,8 @@
 @echo off
 :handles
 Color 6
-set server=##SERVER IP WITH HELD FROM GITHUB##
-set back-server=##SERVER IP WITH HELD FROM GITHUB##
+set server=##SERVER IP WITH HELD FROM GITHUB##\backup
+set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%\
 set server-map=T:\
 set installed=%appdata%\.minecraft\
 set V=A01
@@ -66,9 +66,9 @@ REM Out.
 
 :run-backup
 cls
-NET USE T: %server%\backup\%username% /P:No
+NET USE T: %back-server-folder% /P:No
 cd %installed%
-XCOP
+XCOPY
 NET USE T: /DELETE /Y
 
 :ZipDown
@@ -77,7 +77,7 @@ REM .In
 REM Starting the download again
 REM .Out
 NET USE T: /DELETE /Y
-NET USE T: %server%\backup\ /P:No
+NET USE T: %server%\updates\ /P:No
 echo Getting the new version, depending on your internet this could be a while.
 echo After it has compleated it will automatically continue!
 XCOPY "%server-map%\update.zip" /q "C:\Minecraft\"
@@ -88,5 +88,6 @@ cls
 REM .In
 REM Going to unzip the file.
 REM .Out
-Expand C:\Minecraft\minecraft.zip
+Expand C:\Minecraft\update.zip
+del "update.zip"
 XCOPY "C:\Minecraft\" /q "%appdata%\.minecraft\"
