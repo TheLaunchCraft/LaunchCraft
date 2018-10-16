@@ -60,6 +60,9 @@ REM .Out
 :continue
 cls
 NET USE T: /DELETE /Y
+REM In.
+REM Enter rest of code to start the game here
+REM Out.
 
 :run-backup
 cls
