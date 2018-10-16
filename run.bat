@@ -17,15 +17,16 @@ echo and we think this letter would not be used for anything else.
 echo.
 echo If your ready to continue,
 pause
-goto server-map
-
-
-:server-map
-NET USE T: %server%\backup\ /P:No
 goto server
+
+REM In.
+REM server-map-info
+REM NET USE T: %server% /P:No
+REM Out.
 
 :server
 cls
+NET USE T: %server%\information\ /P:No /user:##username and password withheld##
 echo.
 echo Is there a server?
 echo.
@@ -38,6 +39,7 @@ IF EXIST "%server-map%\%V%.txt" (echo Match) ELSE (goto GetUpdate)
 goto continue
 
 :Fail
+NET USE T: /DELETE /Y
 cls
 echo Checking of the version failed.
 echo This could be due to not be connected to the internet.
@@ -52,7 +54,7 @@ echo Getting the new launcher version.
 echo.
 IF EXIST "%server-map%\update.zip" (goto ZipDown) ELSE (goto UnZip)
 REM .In
-REM Should be downloading the new version.
+REM It should now be downloading the update.
 REM .Out
 
 :continue
