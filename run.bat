@@ -57,6 +57,7 @@ REM .In
 REM It should now be downloading the update.
 REM .Out
 
+
 :continue
 cls
 NET USE T: /DELETE /Y
@@ -64,12 +65,25 @@ REM In.
 REM Enter rest of code to start the game here
 REM Out.
 
+
 :run-backup
 cls
 NET USE T: %back-server-folder% /P:No
-cd %installed%
+IF EXIST "%server-map%auth.txt" (echo Authorised) ELSE (goto self-backup)
+"T:\zipper.vbs" "%installed%\saves\" "T:\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
 XCOPY
 NET USE T: /DELETE /Y
+:self-backup
+NET USE T: /DELETE /Y
+:zipper
+IF EXIST "C:\zipper.vbs" (goto Zip) ELSE (goto grab-zipper)
+:grab-zipper
+NET USE T: %server%\information\
+XCOPY "T:\zipper.vbs" /q "C:\Minecraft\"
+NET USE T: /DELETE /Y
+:Zip
+"C:\zipper.vbs" "C:\folderToZip\" "C:\mynewzip.zip"
+XCOPY`
 
 :ZipDown
 cls
