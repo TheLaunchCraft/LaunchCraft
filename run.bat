@@ -3,7 +3,7 @@
 Color 6
 set server=##SERVER IP WITH HELD FROM GITHUB##\backup
 set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%\
-set server-map=T:\
+set server-map=T:
 set installed=%appdata%\.minecraft\
 set V=A01
 set name=Minecraft Launcher %V%
@@ -70,7 +70,7 @@ REM Out.
 :run-backup
 cls
 NET USE T: %back-server-folder% /P:No
-IF EXIST "%server-map%auth.txt" (echo Authorised) ELSE (goto self-backup)
+IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
 "T:\zipper.vbs" "%installed%\saves\" "T:\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
 XCOPY
 NET USE T: /DELETE /Y
@@ -83,6 +83,9 @@ NET USE T: %server%\information\
 XCOPY "T:\zipper.vbs" /q "C:\Minecraft\"
 NET USE T: /DELETE /Y
 :Zip
+REM .In
+REM Simple code so we know what goes where.
+REM .Out
 "C:\zipper.vbs" "C:\folderToZip\" "C:\mynewzip.zip"
 XCOPY`
 
