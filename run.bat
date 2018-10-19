@@ -67,6 +67,7 @@ REM Out.
 cls
 NET USE T: %back-server-folder% /P:No
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
+type NUL > backup-started-%computername%-%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
 "T:\zipper.vbs" "%installed%\saves\" "T:\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
 XCOPY
 NET USE T: /DELETE /Y
