@@ -1,7 +1,8 @@
-# GFALaunchCraft
+# LaunchCraft
 A FULLY CUSTOMISED MINECRAFT GAME LAUNCHER THAT AUTO BACKUPS.
 
 Copyright © 2018 LochStudios
+
 https://www.lochstudios.com
 
 This code is licensed under the Mozilla Public License 2.0,
