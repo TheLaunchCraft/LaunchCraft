@@ -20,10 +20,6 @@ echo If your ready!
 pause
 goto server
 
-REM In.
-REM server-map-info
-REM NET USE T: %server% /P:No
-REM Out.
 :again
 :server
 cls
