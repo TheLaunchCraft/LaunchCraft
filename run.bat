@@ -12,7 +12,7 @@ cls
 
 :notice
 echo.
-echo Please make sure you have nothing mapped to your T drive.
+echo Please make sure you have nothing is mapped to your T drive.
 echo This launcher uses this drive because it's at the center of the
 echo letters and we think this letter would not be used for anything else.
 echo.
