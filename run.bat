@@ -68,7 +68,7 @@ cls
 NET USE %server-map% %back-server-folder% /P:No /P:No /user:##username and password withheld##
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
 type NUL > %server-map%\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
-"%server-map%\Minecraft\zipper.vbs" "%installed%\saves\" "%server-map%\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
+"%server-map%\zipper.vbs" "%installed%\saves\" "%server-map%\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
 NET USE %server-map% /DELETE /Y
 :self-backup
 NET USE %server-map% /DELETE /Y
