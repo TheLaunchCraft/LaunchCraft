@@ -23,7 +23,7 @@ goto server
 :again
 :server
 cls
-NET USE T: %server%\information /P:No /user:##username and password withheld##
+NET USE %server-map% %server%\information /P:No /user:##username and password withheld##
 echo.
 echo Is there a server?
 echo.
@@ -36,7 +36,7 @@ IF EXIST "%server-map%\%V%.txt" (echo Match) ELSE (goto GetUpdate)
 goto continue
 
 :Fail
-NET USE T: /DELETE /Y
+NET USE %server-map% /DELETE /Y
 cls
 echo Checking of the version failed.
 echo This could be due to not be connected to the internet.
@@ -57,7 +57,7 @@ REM .Out
 
 :continue
 cls
-NET USE T: /DELETE /Y
+NET USE %server-map% /DELETE /Y
 REM In.
 REM Enter rest of code to start the game here
 REM Out.
@@ -90,8 +90,8 @@ cls
 REM .In
 REM Starting the download again
 REM .Out
-NET USE T: /DELETE /Y
-NET USE T: %server%\updates\ /P:No
+NET USE %server-map% /DELETE /Y
+NET USE %server-map% %server%\updates\ /P:No
 echo Getting the new version, depending on your internet this could be a while.
 echo After it has compleated it will automatically continue!
 XCOPY "%server-map%\update.zip" /q "C:\Minecraft\"
