@@ -41,7 +41,7 @@ cls
 echo Checking of the version failed.
 echo This could be due to not be connected to the internet.
 echo Please check your internet connection and try again.
-echo After checking your connection, press anykey to try again.
+echo After checking your connection,
 pause
 goto again
 
