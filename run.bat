@@ -112,18 +112,28 @@ del "C:\Minecraft\updates\update-%V%.zip"
 MOVE "C:\Minecraft\updates\*.*" /q "C:\Minecraft"
 RD "C:\Minecraft\updates"
 
-
-
-
-
-
-
 :continue
 cls
 NET USE %server-map% /DELETE /Y
-REM In.
-REM Enter rest of code to start the game here
-REM Out.
+IF EXIST "C:\Program Files (x86)\Minecraft\MinecraftLauncher.exe" () ELSE (goto NoGame)
+cls
+start "Lauching; %name%" "C:\Program Files (x86)\Minecraft\MinecraftLauncher.exe"
+echo Starting Minecraft...Only Close This When You've Finshed Playing!
+echo  As This Will Stop The Worlds Backing Up.
 pause
 goto run-backup
 
+:NoGame
+Echo.
+echo Minecraft is not installed,
+echo please install it from the Minecrat
+echo website, or copy this link.
+echo.
+echo https://launcher.mojang.com/download/MinecraftInstaller.msi
+echo.
+echo Launch will exit afer you press any key.
+echo.
+echo.
+echo.
+pause
+exit
