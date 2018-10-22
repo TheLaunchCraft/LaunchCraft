@@ -23,7 +23,7 @@ goto server
 :again
 :server
 cls
-NET USE T: %server%\information\ /P:No /user:##username and password withheld##
+NET USE T: %server%\information /P:No /user:##username and password withheld##
 echo.
 echo Is there a server?
 echo.
