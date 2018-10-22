@@ -2,7 +2,7 @@
 :handles
 Color 6
 set server=##SERVER IP WITH HELD FROM GITHUB##\backup
-set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%\
+set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%
 set server-map=T:
 set installed=%appdata%\.minecraft\
 set V=A01
@@ -65,26 +65,25 @@ REM Out.
 
 :run-backup
 cls
-NET USE T: %back-server-folder% /P:No
+NET USE %server-map% %back-server-folder% /P:No /P:No /user:##username and password withheld##
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
 type NUL > %server-map%\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
-"T:\zipper.vbs" "%installed%\saves\" "T:\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
-XCOPY
-NET USE T: /DELETE /Y
+"%server-map%\Minecraft\zipper.vbs" "%installed%\saves\" "%server-map%\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
+NET USE %server-map% /DELETE /Y
 :self-backup
-NET USE T: /DELETE /Y
+NET USE %server-map% /DELETE /Y
 :zipper
 IF EXIST "C:\zipper.vbs" (goto Zip) ELSE (goto grab-zipper)
 :grab-zipper
-NET USE T: %server%\information\
-XCOPY "T:\zipper.vbs" /q "C:\Minecraft\"
-NET USE T: /DELETE /Y
+NET USE %server-map% %server%\information /P:No /user:##username and password withheld##
+XCOPY "%server-map%\zipper.vbs" /q "C:\Minecraft\"
+NET USE %server-map% /DELETE /Y
 :Zip
 REM .In
 REM Simple code so we know what goes where.
 REM .Out
 "C:\zipper.vbs" "C:\folderToZip\" "C:\mynewzip.zip"
-XCOPY`
+XCOPY
 
 :ZipDown
 cls
