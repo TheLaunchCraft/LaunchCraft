@@ -4,7 +4,7 @@ Color 6
 set server=##SERVER IP WITH HELD FROM GITHUB##\backup
 set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%
 set server-map=T:
-set installed=%appdata%\.minecraft\
+set installed=%appdata%\.minecraft
 set V=A01
 set name=Minecraft Launcher %V%
 title %name%
@@ -49,48 +49,45 @@ goto again
 cls
 echo Getting the new launcher version.
 echo.
-IF EXIST "%server-map%\update.zip" (goto ZipDown) ELSE (goto UnZip)
+IF EXIST "%server-map%\update.zip" (goto ZipDown) ELSE (goto FailUpdate)
 REM .In
 REM It should now be downloading the update.
 REM .Out
 
-
-:continue
-cls
+:FailUpdate
 NET USE %server-map% /DELETE /Y
-REM In.
-REM Enter rest of code to start the game here
-REM Out.
-
+cls
+echo Checking of the update failed.
+echo This could be due to connection problem to the internet.
+echo Please check your internet connection and try again.
+echo After checking your connection,
+pause
+goto GetUpdate
 
 :run-backup
 cls
 NET USE %server-map% %back-server-folder% /P:No /P:No /user:##username and password withheld##
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
-type NUL > %server-map%\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
-Start "%server-map%\zipper.vbs"
-
-REM In.
-REM "%server-map%\worlds\worlds-%date:~4,2%-%date:~7,2%-%date:~-2,2%.zip"
-REM .
-REM Need to make a rename code here.
-REM Out.
-
+MD %server-map%\logs
+type NUL > %server-map%\logs\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
+REM In. -- Folders
+MD %server-map%\worlds
+MD %server-map%\worlds\%date:~10%
+MD %server-map%\worlds\%date:~10%\%date:~7,2%
+MD %server-map%\worlds\%date:~10%\%date:~7,2%\%date:~4,2%
+REM Out. -- Folders
+XCOPY "%installed%\saves"/S /R /V /Y /Z "%server-map%\worlds\%date:~10%\%date:~7,2%\%date:~4,2%\"
 NET USE %server-map% /DELETE /Y
+exit
+
 :self-backup
 NET USE %server-map% /DELETE /Y
-:zipper
-IF EXIST "C:\zipper.vbs" (goto Zip) ELSE (goto grab-zipper)
-:grab-zipper
-NET USE %server-map% %server%\information /P:No /user:##username and password withheld##
-XCOPY "%server-map%\zipper.vbs" /q "C:\Minecraft\"
-NET USE %server-map% /DELETE /Y
-:Zip
-REM .In
-REM Simple code so we know what goes where.
-REM .Out
-"C:\zipper.vbs" "C:\folderToZip\" "C:\mynewzip.zip"
-XCOPY
+MD C:\Minecraft\worlds
+MD C:\Minecraft\worlds\%date:~10%
+MD C:\Minecraft\worlds\%date:~10%\%date:~7,2%
+MD C:\Minecraft\worlds\%date:~10%\%date:~7,2%\%date:~4,2%
+XCOPY "%installed%\saves"/S /R /V /Y /Z "C:\Minecraft\worlds\%date:~10%\%date:~7,2%\%date:~4,2%\"
+exit
 
 :ZipDown
 cls
@@ -101,7 +98,8 @@ NET USE %server-map% /DELETE /Y
 NET USE %server-map% %server%\updates\ /P:No
 echo Getting the new version, depending on your internet this could be a while.
 echo After it has compleated it will automatically continue!
-XCOPY "%server-map%\update.zip" /q "C:\Minecraft\"
+MD C:\Minecraft\updates
+XCOPY "%server-map%\update-%V%.zip" /q "C:\Minecraft\updates"
 goto UnZip
 
 :UnZip
@@ -109,6 +107,23 @@ cls
 REM .In
 REM Going to unzip the file.
 REM .Out
-Expand C:\Minecraft\update.zip
-del "update.zip"
-XCOPY "C:\Minecraft\" /q "%appdata%\.minecraft\"
+Expand "C:\Minecraft\updates\update.zip"
+del "C:\Minecraft\updates\update-%V%.zip"
+MOVE "C:\Minecraft\updates\*.*" /q "C:\Minecraft"
+RD "C:\Minecraft\updates"
+
+
+
+
+
+
+
+:continue
+cls
+NET USE %server-map% /DELETE /Y
+REM In.
+REM Enter rest of code to start the game here
+REM Out.
+pause
+goto run-backup
+
