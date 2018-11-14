@@ -1,7 +1,10 @@
 @echo off
 :handles
 Color 6
-set server=##SERVER IP WITH HELD FROM GITHUB##\backup
+REM In.
+REM 9j28gnr
+REM Out.
+set server=##SERVER IP WITH HELD FROM GITHUB##\
 set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%
 set server-map=T:
 set installed=%appdata%\.minecraft
@@ -23,7 +26,7 @@ goto server
 :again
 :server
 cls
-NET USE %server-map% %server%\information /P:No /user:##username and password withheld##
+NET USE %server-map% %server%\information /P:No /user:launchcraft ##password withheld##
 echo.
 echo Is there a server?
 echo.
@@ -66,7 +69,7 @@ goto GetUpdate
 
 :run-backup
 cls
-NET USE %server-map% %back-server-folder% /P:No /P:No /user:##username and password withheld##
+NET USE %server-map% %back-server-folder% /P:No /P:No /user:launchcraft ##password withheld##
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
 MD %server-map%\logs
 type NUL > %server-map%\logs\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
