@@ -4,20 +4,20 @@ Color 6
 REM In.
 REM 9j28gnr
 REM Out.
-set server=##SERVER IP WITH HELD FROM GITHUB##\
+set server=##SERVER IP WITH HELD FROM GITHUB##\LaunchCraft\
 set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\users\%username%
 set server-map=T:
 set installed=%appdata%\.minecraft
-set V=A01
+set V=A01.1
 set name=Minecraft Launcher %V%
 title %name%
 cls
 
 :notice
 echo.
-echo Please make sure you have nothing is mapped to your T drive.
+echo Please make sure you have nothing is mapped to the T drive.
 echo This launcher uses this drive because it's at the center of the
-echo letters and we think this letter would not be used for anything else.
+echo letters and we think this letter wouldn't be used for anything else.
 echo.
 echo If your ready!
 pause
@@ -69,9 +69,10 @@ goto GetUpdate
 
 :run-backup
 cls
-NET USE %server-map% %back-server-folder% /P:No /P:No /user:launchcraft ##password withheld##
+REM NEW USE HERE IS READ ONLY USER
+NET USE %server-map% %back-server-folder% /P:No /P:No /user:auth K3BOIKQwnyFd989gqh
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
-MD %server-map%\logs
+IF EXIST "%server-map%\logs" (echo found) ELSE (MD %server-map%\logs)
 type NUL > %server-map%\logs\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
 REM In. -- Folders
 MD %server-map%\worlds
@@ -80,6 +81,7 @@ MD %server-map%\worlds\%date:~10%\%date:~7,2%
 MD %server-map%\worlds\%date:~10%\%date:~7,2%\%date:~4,2%
 REM Out. -- Folders
 XCOPY "%installed%\saves"/S /R /V /Y /Z "%server-map%\worlds\%date:~10%\%date:~7,2%\%date:~4,2%\"
+type NUL > %server-map%\logs\backup-finished--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
 NET USE %server-map% /DELETE /Y
 exit
 
@@ -98,7 +100,7 @@ REM .In
 REM Starting the download again
 REM .Out
 NET USE %server-map% /DELETE /Y
-NET USE %server-map% %server%\updates\ /P:No
+NET USE %server-map% %server%\updates\ /P:No /user:launchcraft ##password withheld##
 echo Getting the new version, depending on your internet this could be a while.
 echo After it has compleated it will automatically continue!
 MD C:\Minecraft\updates
