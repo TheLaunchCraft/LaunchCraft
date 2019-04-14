@@ -5,7 +5,7 @@ REM In.
 REM 9j28gnr
 REM Out.
 set server=##SERVER IP WITH HELD FROM GITHUB##\
-set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\backup\users\%username%
+set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\users\%username%
 set server-map=T:
 set installed=%appdata%\.minecraft
 set V=A01
