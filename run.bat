@@ -26,7 +26,7 @@ goto server
 :again
 :server
 cls
-NET USE %server-map% %server%\information /P:No /user:launchcraft ##password withheld##
+NET USE %server-map% %server%\information /P:No /user:launchcraft ##passwordwithheld##
 echo.
 echo Is there a server?
 echo.
@@ -60,8 +60,8 @@ REM .Out
 :FailUpdate
 NET USE %server-map% /DELETE /Y
 cls
-echo Checking of the update failed.
-echo This could be due to connection problem to the internet.
+echo Checking for updates failed.
+echo This could be due to connection problem to the internet or an issue with our update server.
 echo Please check your internet connection and try again.
 echo After checking your connection,
 pause
@@ -70,7 +70,7 @@ goto GetUpdate
 :run-backup
 cls
 REM NEW USE HERE IS READ ONLY USER
-NET USE %server-map% %back-server-folder% /P:No /P:No /user:auth K3BOIKQwnyFd989gqh
+NET USE %server-map% %back-server-folder% /P:No /P:No /user:auth ##passwordwithheld##
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
 IF EXIST "%server-map%\logs" (echo found) ELSE (MD %server-map%\logs)
 type NUL > %server-map%\logs\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
@@ -100,7 +100,7 @@ REM .In
 REM Starting the download again
 REM .Out
 NET USE %server-map% /DELETE /Y
-NET USE %server-map% %server%\updates\ /P:No /user:launchcraft ##password withheld##
+NET USE %server-map% %server%\updates\ /P:No /user:launchcraft ##passwordwithheld##
 echo Getting the new version, depending on your internet this could be a while.
 echo After it has compleated it will automatically continue!
 MD C:\Minecraft\updates
