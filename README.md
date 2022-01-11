@@ -1,9 +1,9 @@
 # LaunchCraft
-A FULLY CUSTOMISED MINECRAFT GAME LAUNCHER THAT AUTO BACKUPS.
+A FULLY CUSTOMISED MINECRAFT GAME LAUNCHER THAT CAN AUTO BACKUPS.
 
 Copyright © 2019 LochStudios
 
-https://home.lochstudios.com
+https://lochstudios.com
 
 This code is licensed under the Mozilla Public License 2.0,
 You will reseive no warranty with this.
@@ -14,4 +14,4 @@ If your copying any/all of the code you must provide a link to the orignal sourc
 A copy of the license and the copyright notice must be included with this code.
 
 
-If you need any help in anyway, contact us using Discord: https://discord.gg/a9kzJwU
+If you need any help in anyway, contact us using Discord: https://discord.gg/ThAUajr
