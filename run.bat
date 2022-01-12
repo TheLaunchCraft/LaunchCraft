@@ -9,7 +9,7 @@ set server=\LaunchCraft\
 set back-server-folder=%IP%\users\%username%
 set server-map=T:
 set installed=%appdata%\.minecraft
-set V=A01.1
+set V=A01.2
 set name=Minecraft Launcher %V%
 title %name%
 cls
