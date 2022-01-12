@@ -26,6 +26,7 @@ pause
 :server
 :again
 cls
+NET USE %server-map% /DELETE /Y
 NET USE %server-map% %IP%%IP%%server%\information /P:No /user:launchcraft ##passwordwithheld##
 echo.
 echo Is there a server?
@@ -74,17 +75,18 @@ goto continue
 
 :run-backup
 cls
-REM NEW USE HERE IS READ ONLY USER
+REM CHECKING FOR USER AUTH BEFORE CONTINUE
+NET USE %server-map% /DELETE /Y
 NET USE %server-map% %back-server-folder% /P:No /P:No /user:auth ##passwordwithheld##
 IF EXIST "%server-map%\auth.txt" (echo Authorised) ELSE (goto self-backup)
 IF EXIST "%server-map%\logs" (echo found) ELSE (MD %server-map%\logs)
 type NUL > %server-map%\logs\backup-started--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
-REM In. -- Folders
+REM In. -- Make Folders
 MD %server-map%\worlds
 MD %server-map%\worlds\%date:~10%
 MD %server-map%\worlds\%date:~10%\%date:~7,2%
 MD %server-map%\worlds\%date:~10%\%date:~7,2%\%date:~4,2%
-REM Out. -- Folders
+REM Out. -- Make Folders
 XCOPY "%installed%\saves"/S /R /V /Y /Z "%server-map%\worlds\%date:~10%\%date:~7,2%\%date:~4,2%\"
 type NUL > %server-map%\logs\backup-finished--%computername%--%date:~4,2%-%date:~7,2%-%date:~-2,2%.txt
 NET USE %server-map% /DELETE /Y
