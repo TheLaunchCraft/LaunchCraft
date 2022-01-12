@@ -37,5 +37,4 @@ del "C:\Minecraft\updates\update-%V%.zip"
 MOVE "C:\Minecraft\updates\*.*" /q "C:\Minecraft"
 RD "C:\Minecraft\updates"
 
-
 EXIT /B
