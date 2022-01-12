@@ -22,8 +22,8 @@ echo.
 echo If your ready!
 pause
 
-:again
 :server
+:again
 cls
 NET USE %server-map% %server%\information /P:No /user:launchcraft ##passwordwithheld##
 echo.
