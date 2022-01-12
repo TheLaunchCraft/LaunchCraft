@@ -21,7 +21,6 @@ echo letters and we think this letter wouldn't be used for anything else.
 echo.
 echo If your ready!
 pause
-goto server
 
 :again
 :server
@@ -52,7 +51,7 @@ goto again
 cls
 echo Getting the new launcher version.
 echo.
-IF EXIST "%server-map%\update.zip" (goto ZipDown) ELSE (goto FailUpdate)
+IF EXIST "%server-map%\update.zip" (goto UpdateNow) ELSE (goto FailUpdate)
 REM .In
 REM It should now be downloading the update.
 REM .Out
@@ -66,6 +65,11 @@ echo Please check your internet connection and try again.
 echo After checking your connection,
 pause
 goto GetUpdate
+
+:UpdateNow
+cls
+CALL "%server-map%\update.bat"
+goto continue
 
 :run-backup
 cls
@@ -93,29 +97,6 @@ MD C:\Minecraft\worlds\%date:~10%\%date:~7,2%
 MD C:\Minecraft\worlds\%date:~10%\%date:~7,2%\%date:~4,2%
 XCOPY "%installed%\saves"/S /R /V /Y /Z "C:\Minecraft\worlds\%date:~10%\%date:~7,2%\%date:~4,2%\"
 exit
-
-:ZipDown
-cls
-REM .In
-REM Starting the download again
-REM .Out
-NET USE %server-map% /DELETE /Y
-NET USE %server-map% %server%\updates\ /P:No /user:launchcraft ##passwordwithheld##
-echo Getting the new version, depending on your internet this could be a while.
-echo After it has compleated it will automatically continue!
-MD C:\Minecraft\updates
-XCOPY "%server-map%\update-%V%.zip" /q "C:\Minecraft\updates"
-goto UnZip
-
-:UnZip
-cls
-REM .In
-REM Going to unzip the file.
-REM .Out
-Expand "C:\Minecraft\updates\update.zip"
-del "C:\Minecraft\updates\update-%V%.zip"
-MOVE "C:\Minecraft\updates\*.*" /q "C:\Minecraft"
-RD "C:\Minecraft\updates"
 
 :continue
 cls
