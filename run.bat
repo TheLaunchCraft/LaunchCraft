@@ -26,7 +26,7 @@ pause
 :server
 :again
 cls
-NET USE %server-map% %server%\information /P:No /user:launchcraft ##passwordwithheld##
+NET USE %server-map% %IP%%IP%%server%\information /P:No /user:launchcraft ##passwordwithheld##
 echo.
 echo Is there a server?
 echo.
