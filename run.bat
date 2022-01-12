@@ -4,7 +4,8 @@ Color 6
 REM In.
 REM 9j28gnr
 REM Out.
-set server=##SERVER IP WITH HELD FROM GITHUB##\LaunchCraft\
+set IP=##SERVER IP WITH HELD FROM GITHUB##
+set server=\LaunchCraft\
 set back-server-folder=##SERVER IP WITH HELD FROM GITHUB##\users\%username%
 set server-map=T:
 set installed=%appdata%\.minecraft
