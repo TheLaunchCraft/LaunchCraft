@@ -1,7 +1,7 @@
 # LaunchCraft
 A FULLY CUSTOMISED MINECRAFT GAME LAUNCHER THAT CAN AUTO BACKUPS.
 
-Copyright © 2019 LochStudios
+Copyright © 2022 LochStudios
 
 https://lochstudios.com
 
