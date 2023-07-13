@@ -45,19 +45,14 @@ $window.ShowDialog() | Out-Null
 
 Write-Host $name
 Clear-Host
-
-Write-Host ""
 Write-Host "Please make sure you have nothing is mapped to the T drive."
 Write-Host "This launcher uses this drive because it's at the center of the"
 Write-Host "letters and we think this letter wouldn't be used for anything else."
-Write-Host ""
 Write-Host "If you're ready!"
 Pause
 
 while ($true) {
-    Write-Host ""
     Write-Host "Is there a server?"
-    Write-Host ""
     if (Test-Path -Path "$serverMap\is-server.txt") {
         break
     } else {
@@ -79,7 +74,6 @@ while ($true) {
     } else {
         Clear-Host
         Write-Host "Getting the new launcher version."
-        Write-Host ""
         if (Test-Path -Path "$serverMap\update.zip") {
             break
         } else {
@@ -127,17 +121,11 @@ if ($authResult) {
 
 Clear-Host
 if (!(Test-Path -Path "C:\Program Files (x86)\Minecraft\MinecraftLauncher.exe")) {
-    Write-Host ""
     Write-Host "Minecraft is not installed,"
     Write-Host "please install it from the Minecraft"
     Write-Host "website or copy this link."
-    Write-Host ""
     Write-Host "https://launcher.mojang.com/download/MinecraftInstaller.msi"
-    Write-Host ""
     Write-Host "Launch will exit after you press any key."
-    Write-Host ""
-    Write-Host ""
-    Write-Host ""
     Pause
     exit
 } else {
