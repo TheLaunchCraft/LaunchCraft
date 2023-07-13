@@ -43,13 +43,38 @@ $StartButton.Add_Click($StartButton_Click)
 
 $window.ShowDialog() | Out-Null
 
-Write-Host $name
-Clear-Host
-Write-Host "Please make sure you have nothing is mapped to the T drive."
-Write-Host "This launcher uses this drive because it's at the center of the"
-Write-Host "letters and we think this letter wouldn't be used for anything else."
-Write-Host "If you're ready!"
-Pause
+$XAML = @"
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Minecraft Launcher" Height="300" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="10" FontSize="20" Text="Minecraft Launcher" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Margin="10">
+            <TextBlock Text="Please make sure you have nothing mapped to the T drive." TextWrapping="Wrap" Margin="0 0 0 10"/>
+            <TextBlock Text="This launcher uses this drive because it's at the center of the letters and we think this letter wouldn't be used for anything else." TextWrapping="Wrap" Margin="0 0 0 10"/>
+            <TextBlock Text="If you're ready, click the OK button." TextWrapping="Wrap" Margin="0 0 0 10"/>
+            <Button x:Name="OKButton" Content="OK" Width="100" Margin="0 20 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>
+"@
+
+$window = [Windows.Markup.XamlReader]::Parse($XAML)
+
+$OKButton = $window.FindName("OKButton")
+
+$OKButton_Click = {
+    $window.Close()
+}
+
+$OKButton.Add_Click($OKButton_Click)
+
+$window.ShowDialog() | Out-Null
 
 while ($true) {
     Write-Host "Is there a server?"
