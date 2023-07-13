@@ -1,3 +1,26 @@
+Add-Type -AssemblyName PresentationFramework
+
+$XAML = @"
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Minecraft Launcher" Height="200" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="10" FontSize="20" Text="Minecraft Launcher" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Margin="10">
+            <TextBlock Text="Please make sure you have nothing is mapped to the T drive."/>
+            <TextBlock Text="This launcher uses this drive because it's at the center of the letters and we think this letter wouldn't be used for anything else."/>
+            <TextBlock Text="If you're ready, click the Start button."/>
+            <Button x:Name="StartButton" Content="Start" Width="100" Margin="0 20 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>
+"@
+
 $ErrorActionPreference = "Stop"
 
 $IP = "##SERVER IP WITHHELD FROM GITHUB##"
@@ -7,6 +30,18 @@ $serverMap = "T:"
 $installed = "$env:appdata\.minecraft"
 $V = "A01.2"
 $name = "Minecraft Launcher $V"
+
+$window = [Windows.Markup.XamlReader]::Parse($XAML)
+
+$StartButton = $window.FindName("StartButton")
+
+$StartButton_Click = {
+    $window.Close()
+}
+
+$StartButton.Add_Click($StartButton_Click)
+
+$window.ShowDialog() | Out-Null
 
 Write-Host $name
 Clear-Host
